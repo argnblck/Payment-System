@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 export class CreateUserDto {
     @ApiProperty({ example: 'username@gmail.com', description: 'Почтовыый адрес' })
@@ -10,3 +10,5 @@ export class CreateUserDto {
     @ApiProperty({ example: 'Иванов', description: 'Фамилия пользователя' })
     readonly lastName: string;
 }
+
+export class LoginUserDto extends PickType(CreateUserDto, ['email', 'password'] as const) { }
