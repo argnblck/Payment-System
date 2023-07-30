@@ -9,6 +9,10 @@ import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { AccountsModule } from './accounts/accounts.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { Transaction } from './transactions/transactions.model';
+import { Account } from './accounts/accounts.model';
 
 @Module({
 	controllers: [],
@@ -29,13 +33,15 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Role, UserRoles],
+			models: [User, Role, UserRoles, Account, Transaction],
 			autoLoadModels: true,
 			synchronize: true
 		}),
 		UsersModule,
 		RolesModule,
-		AuthModule
+		AuthModule,
+		AccountsModule,
+		TransactionsModule
 	],
 })
 export class AppModule { }

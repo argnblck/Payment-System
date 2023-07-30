@@ -20,15 +20,16 @@ export class AuthService {
         if (candidate) {
             throw new HttpException('Пользователь с таким email уже существует', HttpStatus.BAD_REQUEST)
         }
-        const hashPassword = bcrypt.hashPassword(userDto.password, 7);
+        const hashPassword = await bcrypt.hash(userDto.password, 7);
+        console.log(hashPassword);
         const user = await this.usersService.createUser({ ...userDto, password: hashPassword });
         return this.generateToken(user);
     }
 
 
-    async validateUser(userDto: LoginUserDto) {
-        const user = await this.usersService.getUserByEmail(userDto.email);
-        const passwordEquals = await bcrypt.compare(userDto.password, user.password);
+    async validateUser(email: string, password: string) {
+        const user = await this.usersService.getUserByEmail(email);
+        const passwordEquals = await bcrypt.compare(password, user.password);
         if (user && passwordEquals) {
             return user;
         }

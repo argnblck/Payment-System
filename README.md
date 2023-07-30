@@ -1,10 +1,18 @@
 ## Description
 
+API на основе NesJS для платежной системы. Данные сохраняются с помощь Sequelize ORM в базе данных с использованием PostgreSQL. Аутентификация пользователей реализована с помощью passport.js. Пароли пользователей перед сохранением в базу данных хэшируются с помошь пакета bcryptjs.
+API описан с помошью swagger, документация swagger доступна по пути '/api/docs'.
+
+Еще не реализовано:
+Авторизация пользователей для управлением доступа к счетам.
+
 ## Installation
 
 ```bash
 $ npm install
 ```
+
+Так же необходимо создать файл для переменных среды с названием ".development.env" или ".production.env" с содержимым по примеру описаному в .sample.env
 
 ## Running the app
 
@@ -19,19 +27,6 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
 ## License
 
-Nest is [MIT licensed](LICENSE).
+MIT
